@@ -1,19 +1,12 @@
-```html
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Liquid Glass Photo Booth</title>
+<title>Liquid Booth</title>
 
 <style>
-
-/* =====================================================
-   RESET
-===================================================== */
-
 * {
     box-sizing: border-box;
     margin: 0;
@@ -22,44 +15,19 @@
 
 body {
     min-height: 100vh;
-
-    font-family:
-        "Segoe UI",
-        Arial,
-        sans-serif;
-
+    font-family: Arial, Helvetica, sans-serif;
     color: white;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    padding: 25px 15px;
-
-    overflow-x: hidden;
-
     background:
-        linear-gradient(
-            120deg,
-            #9bdff5,
-            #b9a7ef,
-            #f2bddf,
-            #9eddf1
-        );
+        radial-gradient(circle at 10% 20%, rgba(255,255,255,.35), transparent 30%),
+        radial-gradient(circle at 90% 80%, rgba(255,180,230,.35), transparent 30%),
+        linear-gradient(120deg,#74dff5,#938bea,#dd9bd8,#72def2);
 
-    background-size: 300% 300%;
-
-    animation:
-        backgroundMove 15s ease infinite;
+    background-size: 200% 200%;
+    animation: backgroundMove 15s ease infinite;
 }
 
-
-/* =====================================================
-   BACKGROUND
-===================================================== */
-
 @keyframes backgroundMove {
-
     0% {
         background-position: 0% 50%;
     }
@@ -71,1128 +39,692 @@ body {
     100% {
         background-position: 0% 50%;
     }
-
 }
 
-
-.orb {
-
-    position: fixed;
-
-    border-radius: 50%;
-
-    pointer-events: none;
-
-    filter: blur(3px);
-
-    opacity: .35;
-
-    z-index: 0;
-
-    animation:
-        orbFloat 10s ease-in-out infinite alternate;
+.app {
+    width: min(1150px, 96%);
+    margin: auto;
+    padding: 25px 0 50px;
 }
 
+.glass {
+    background: rgba(255,255,255,.16);
+    border: 1px solid rgba(255,255,255,.55);
 
-.orb1 {
-
-    width: 300px;
-    height: 300px;
-
-    left: -100px;
-    top: -100px;
-
-    background:
-        rgba(255,255,255,.7);
-}
-
-
-.orb2 {
-
-    width: 230px;
-    height: 230px;
-
-    right: -70px;
-    top: 20%;
-
-    background:
-        rgba(170,210,255,.7);
-
-    animation-delay: 2s;
-}
-
-
-.orb3 {
-
-    width: 280px;
-    height: 280px;
-
-    left: 30%;
-    bottom: -130px;
-
-    background:
-        rgba(255,180,220,.7);
-
-    animation-delay: 4s;
-}
-
-
-@keyframes orbFloat {
-
-    from {
-        transform:
-            translate(0,0)
-            scale(1);
-    }
-
-    to {
-        transform:
-            translate(60px,50px)
-            scale(1.15);
-    }
-
-}
-
-
-/* =====================================================
-   MAIN GLASS
-===================================================== */
-
-.booth {
-
-    position: relative;
-
-    z-index: 2;
-
-    width: min(1000px, 96%);
-
-    padding: 30px;
-
-    border-radius: 38px;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(255,255,255,.38),
-            rgba(255,255,255,.14)
-        );
-
-    border:
-        1px solid
-        rgba(255,255,255,.7);
-
-    backdrop-filter:
-        blur(35px)
-        saturate(160%);
-
-    -webkit-backdrop-filter:
-        blur(35px)
-        saturate(160%);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
 
     box-shadow:
-
-        0 35px 90px
-        rgba(40,60,100,.28),
-
-        inset 0 1px 2px
-        rgba(255,255,255,.9);
-
-    animation:
-        boothIn .8s cubic-bezier(.2,.8,.2,1);
+        0 20px 60px rgba(30,50,100,.2),
+        inset 0 1px 2px rgba(255,255,255,.8);
 }
 
-
-@keyframes boothIn {
-
-    from {
-
-        opacity: 0;
-
-        transform:
-            translateY(30px)
-            scale(.95);
-    }
-
-    to {
-
-        opacity: 1;
-
-        transform:
-            translateY(0)
-            scale(1);
-    }
-
-}
-
-
-/* =====================================================
-   HEADER
-===================================================== */
+/* HEADER */
 
 .header {
-
-    text-align: center;
-
-    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
 }
-
 
 .logo {
+    width: 55px;
+    height: 55px;
 
-    font-size: 43px;
+    display: grid;
+    place-items: center;
 
-    font-weight: 800;
-
-    letter-spacing: -1px;
-
-    text-shadow:
-        0 5px 20px
-        rgba(50,60,90,.2);
+    border-radius: 18px;
+    font-size: 27px;
 }
 
-
-.subtitle {
-
-    margin-top: 7px;
-
-    font-size: 15px;
-
-    color:
-        rgba(255,255,255,.8);
+.title h1 {
+    font-size: clamp(25px, 5vw, 36px);
+    letter-spacing: 1px;
 }
 
+.title p {
+    margin-top: 4px;
+    opacity: .75;
+    font-size: 13px;
+}
 
-/* =====================================================
-   CAMERA
-===================================================== */
+/* MAIN */
+
+.main {
+    display: grid;
+    grid-template-columns: 1.1fr .9fr;
+    gap: 18px;
+}
+
+/* CAMERA */
+
+.cameraCard {
+    padding: 12px;
+    border-radius: 30px;
+}
 
 .camera {
-
     position: relative;
 
     width: 100%;
+    aspect-ratio: 4 / 3;
 
     overflow: hidden;
+    border-radius: 22px;
 
-    border-radius: 28px;
-
-    background:
-        rgba(0,0,0,.28);
-
-    border:
-        1px solid
-        rgba(255,255,255,.6);
-
-    box-shadow:
-
-        0 20px 50px
-        rgba(30,50,80,.25),
-
-        inset 0 1px 1px
-        rgba(255,255,255,.5);
+    background: #111;
 }
 
-
-video {
-
+#video {
     width: 100%;
+    height: 100%;
 
-    display: block;
+    object-fit: cover;
 
-    transform:
-        scaleX(-1);
+    transform: scaleX(-1);
 
-    transition:
-        filter .4s ease;
+    background: #111;
+
+    transition: filter .35s ease;
 }
 
+/* STATUS */
 
-/* =====================================================
-   ACCESSORY PREVIEW
-===================================================== */
-
-.accessory-preview {
-
+.status {
     position: absolute;
 
-    inset: 0;
+    top: 12px;
+    left: 12px;
 
-    pointer-events: none;
+    z-index: 20;
 
-    z-index: 4;
-}
-
-
-/* Hat */
-
-.preview-hat {
-
-    position: absolute;
-
-    left: 50%;
-
-    top: 3%;
-
-    transform:
-        translateX(-50%);
-
-    font-size:
-        clamp(60px, 11vw, 120px);
-
-    display: none;
-
-    filter:
-        drop-shadow(
-            0 7px 8px
-            rgba(0,0,0,.3)
-        );
-}
-
-
-/* Glasses */
-
-.preview-glasses {
-
-    position: absolute;
-
-    left: 50%;
-
-    top: 42%;
-
-    transform:
-        translate(-50%, -50%);
-
-    font-size:
-        clamp(45px, 8vw, 85px);
-
-    display: none;
-
-    filter:
-        drop-shadow(
-            0 5px 7px
-            rgba(0,0,0,.3)
-        );
-}
-
-
-/* Mustache */
-
-.preview-mustache {
-
-    position: absolute;
-
-    left: 50%;
-
-    top: 57%;
-
-    transform:
-        translate(-50%, -50%);
-
-    font-size:
-        clamp(35px, 6vw, 65px);
-
-    display: none;
-
-    filter:
-        drop-shadow(
-            0 4px 5px
-            rgba(0,0,0,.35)
-        );
-}
-
-
-/* =====================================================
-   STATUS
-===================================================== */
-
-.camera-status {
-
-    position: absolute;
-
-    top: 16px;
-    left: 16px;
-
-    z-index: 8;
-
-    padding:
-        8px 13px;
+    padding: 8px 12px;
 
     border-radius: 20px;
 
-    background:
-        rgba(255,255,255,.18);
+    background: rgba(0,0,0,.3);
+    border: 1px solid rgba(255,255,255,.4);
 
-    border:
-        1px solid
-        rgba(255,255,255,.45);
-
-    backdrop-filter:
-        blur(12px);
+    backdrop-filter: blur(12px);
 
     font-size: 12px;
 }
 
+.dot {
+    color: #76ffae;
+}
 
-/* =====================================================
-   COUNTDOWN
-===================================================== */
+/* COUNTDOWN */
 
-.countdown {
-
+#countdown {
     position: absolute;
-
     inset: 0;
-
-    z-index: 10;
 
     display: none;
 
+    align-items: center;
     justify-content: center;
 
-    align-items: center;
+    z-index: 50;
 
-    font-size: 120px;
-
-    font-weight: 800;
+    font-size: 130px;
+    font-weight: bold;
 
     text-shadow:
-
-        0 5px 25px
-        rgba(0,0,0,.35),
-
-        0 0 40px
-        rgba(255,255,255,.6);
+        0 0 25px white,
+        0 8px 30px rgba(0,0,0,.4);
 }
 
-
-.countdown.show {
-
+#countdown.show {
     display: flex;
-
-    animation:
-        countdownPop .9s ease;
+    animation: countdownAnimation .8s ease;
 }
 
-
-@keyframes countdownPop {
-
+@keyframes countdownAnimation {
     0% {
-
+        transform: scale(1.5);
         opacity: 0;
-
-        transform:
-            scale(1.5);
     }
 
-    40% {
-
+    25% {
+        transform: scale(1);
         opacity: 1;
-
-        transform:
-            scale(1);
     }
 
     100% {
-
+        transform: scale(.7);
         opacity: 0;
-
-        transform:
-            scale(.8);
     }
-
 }
 
+/* FLASH */
 
-/* =====================================================
-   FLASH
-===================================================== */
-
-.flash {
-
+#flash {
     position: absolute;
-
     inset: 0;
-
-    z-index: 15;
 
     background: white;
 
     opacity: 0;
 
     pointer-events: none;
+
+    z-index: 100;
 }
 
-
-.flash.active {
-
-    animation:
-        flashEffect .35s ease;
+#flash.active {
+    animation: cameraFlash .3s ease;
 }
 
-
-@keyframes flashEffect {
-
+@keyframes cameraFlash {
     0% {
         opacity: 0;
     }
 
     30% {
-        opacity: .9;
+        opacity: 1;
     }
 
     100% {
         opacity: 0;
     }
-
 }
 
-
-/* =====================================================
-   CONTROLS
-===================================================== */
+/* CONTROLS */
 
 .controls {
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    flex-wrap: wrap;
-
-    gap: 10px;
-
-    margin-top: 22px;
+    padding: 20px;
+    border-radius: 30px;
 }
 
+.section {
+    margin-bottom: 20px;
+}
 
-/* =====================================================
-   SELECT
-===================================================== */
+.sectionTitle {
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* FILTER */
 
 select {
+    width: 100%;
+    height: 48px;
 
-    appearance: none;
-
-    border:
-        1px solid
-        rgba(255,255,255,.6);
-
-    border-radius: 16px;
-
-    padding:
-        13px 40px 13px 17px;
+    padding: 0 14px;
 
     color: white;
 
-    background:
-        rgba(255,255,255,.18);
+    background: rgba(255,255,255,.15);
 
-    backdrop-filter:
-        blur(15px);
+    border: 1px solid rgba(255,255,255,.55);
 
-    -webkit-backdrop-filter:
-        blur(15px);
+    border-radius: 15px;
 
     outline: none;
 
     cursor: pointer;
 
-    box-shadow:
-
-        inset 0 1px 1px
-        rgba(255,255,255,.7),
-
-        0 8px 20px
-        rgba(50,70,100,.12);
-
-    transition:
-        .3s ease;
+    transition: .2s ease;
 }
-
 
 select:hover {
-
-    transform:
-        translateY(-3px);
-
-    background:
-        rgba(255,255,255,.3);
+    background: rgba(255,255,255,.25);
 }
 
-
-select option {
-
-    background:
-        #8589b4;
-
+option {
+    background: #69699f;
     color: white;
 }
 
+/* FRAME */
 
-/* =====================================================
-   BUTTON
-===================================================== */
+.frameGrid {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 8px;
+}
 
-button {
+.frameBtn {
+    min-height: 55px;
 
-    position: relative;
+    border: 1px solid rgba(255,255,255,.5);
 
-    overflow: hidden;
+    background: rgba(255,255,255,.12);
 
-    border:
-        1px solid
-        rgba(255,255,255,.65);
+    color: white;
 
     border-radius: 17px;
 
-    padding:
-        14px 24px;
-
-    color: white;
-
-    background:
-        rgba(255,255,255,.2);
-
-    backdrop-filter:
-        blur(15px);
-
-    -webkit-backdrop-filter:
-        blur(15px);
+    font-weight: bold;
 
     cursor: pointer;
 
-    font-weight: 700;
-
-    box-shadow:
-
-        inset 0 1px 1px
-        rgba(255,255,255,.8),
-
-        0 10px 25px
-        rgba(50,70,100,.15);
-
     transition:
-
-        transform .25s ease,
-        box-shadow .25s ease,
-        background .25s ease;
+        transform .2s ease,
+        background .2s ease,
+        box-shadow .2s ease;
 }
 
+.frameBtn:hover {
+    background: rgba(255,255,255,.25);
 
-button::before {
+    transform: translateY(-2px);
+}
 
-    content: "";
+.frameBtn:active {
+    transform: scale(.96);
+}
 
-    position: absolute;
+.frameBtn.selected {
+    background: rgba(255,255,255,.32);
 
-    top: -100%;
+    border-color: white;
 
-    left: -80%;
+    box-shadow:
+        0 0 25px rgba(255,255,255,.25);
+}
 
-    width: 50%;
-
-    height: 300%;
-
-    transform:
-        rotate(25deg);
-
+.joyful {
     background:
         linear-gradient(
-            90deg,
-            transparent,
-            rgba(255,255,255,.55),
-            transparent
+            135deg,
+            rgba(255,220,50,.4),
+            rgba(255,100,190,.4)
         );
-
-    transition:
-        left .7s ease;
 }
 
-
-button:hover::before {
-
-    left: 140%;
-}
-
-
-button:hover {
-
-    transform:
-        translateY(-4px)
-        scale(1.02);
-
+.romantic {
     background:
-        rgba(255,255,255,.32);
-
-    box-shadow:
-
-        inset 0 1px 1px
-        rgba(255,255,255,.9),
-
-        0 15px 35px
-        rgba(50,70,100,.22);
+        linear-gradient(
+            135deg,
+            rgba(255,100,170,.4),
+            rgba(190,100,230,.4)
+        );
 }
 
-
-button:active {
-
-    transform:
-        translateY(1px)
-        scale(.97);
+.funny {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(70,220,255,.4),
+            rgba(100,255,160,.4)
+        );
 }
 
+/* CAPTURE */
 
-button:disabled {
+.captureBtn {
+    width: 100%;
+    min-height: 62px;
 
-    cursor:
-        not-allowed;
-}
+    border: 1px solid rgba(255,255,255,.7);
 
+    border-radius: 20px;
 
-/* =====================================================
-   CAPTURE
-===================================================== */
+    color: white;
 
-.capture {
+    font-size: 16px;
+    font-weight: bold;
 
-    padding:
-        16px 32px;
-
-    font-size: 17px;
+    cursor: pointer;
 
     background:
         linear-gradient(
             135deg,
-            rgba(255,255,255,.43),
-            rgba(255,190,225,.32)
+            rgba(255,255,255,.35),
+            rgba(255,120,210,.3),
+            rgba(70,210,255,.3)
         );
-}
-
-
-/* =====================================================
-   RETAKE / DOWNLOAD
-===================================================== */
-
-.retake,
-.download {
-
-    display: none;
-}
-
-
-/* =====================================================
-   RESULT
-===================================================== */
-
-.result {
-
-    display: flex;
-
-    justify-content: center;
-
-    margin-top: 28px;
-}
-
-
-canvas {
-
-    display: none;
-
-    width:
-        min(500px,100%);
-
-    height: auto;
-
-    border-radius: 20px;
-
-    border:
-        1px solid
-        rgba(255,255,255,.8);
 
     box-shadow:
+        0 12px 35px rgba(50,70,150,.3),
+        inset 0 1px 2px white;
 
-        0 25px 60px
-        rgba(40,60,90,.3),
-
-        0 0 0 8px
-        rgba(255,255,255,.08);
-
-    animation:
-        resultIn .7s ease;
+    transition: .2s ease;
 }
 
+.captureBtn:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 15px 40px rgba(50,70,150,.4),
+        0 0 25px rgba(255,255,255,.2);
+}
+
+.captureBtn:active {
+    transform: scale(.97);
+}
+
+.captureBtn:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+}
+
+/* RESULT */
+
+.result {
+    display: none;
+
+    margin-top: 20px;
+
+    padding: 20px;
+
+    border-radius: 30px;
+}
+
+.result.show {
+    display: block;
+
+    animation: resultIn .4s ease;
+}
 
 @keyframes resultIn {
-
     from {
-
         opacity: 0;
-
-        transform:
-            translateY(20px)
-            scale(.94);
+        transform: translateY(15px);
     }
 
     to {
-
         opacity: 1;
-
-        transform:
-            translateY(0)
-            scale(1);
+        transform: translateY(0);
     }
-
 }
 
-
-/* =====================================================
-   MESSAGE
-===================================================== */
-
-.bottom {
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    gap: 8px;
-
-    margin-top: 18px;
-
-    color:
-        rgba(255,255,255,.75);
-
-    font-size: 13px;
+.result h2 {
+    margin-bottom: 15px;
 }
 
+#resultCanvas {
+    display: block;
 
-.dot {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
 
-    width: 7px;
-    height: 7px;
+    margin: auto;
 
-    border-radius: 50%;
-
-    background: white;
-
-    box-shadow:
-        0 0 10px white;
+    border-radius: 18px;
 }
 
+.resultButtons {
+    display: grid;
 
-/* =====================================================
-   MOBILE
-===================================================== */
+    grid-template-columns: 1fr 1fr;
 
-@media (max-width: 650px) {
+    gap: 10px;
 
-    body {
-        padding: 12px;
+    max-width: 600px;
+
+    margin: 15px auto 0;
+}
+
+.actionBtn {
+    min-height: 52px;
+
+    border: 1px solid rgba(255,255,255,.5);
+
+    background: rgba(255,255,255,.15);
+
+    color: white;
+
+    border-radius: 17px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: .2s ease;
+}
+
+.actionBtn:hover {
+    background: rgba(255,255,255,.28);
+    transform: translateY(-2px);
+}
+
+.actionBtn:active {
+    transform: scale(.96);
+}
+
+/* MOBILE */
+
+@media (max-width: 800px) {
+
+    .app {
+        width: 95%;
+        padding-top: 12px;
     }
 
-    .booth {
-
-        width: 100%;
-
-        padding: 18px;
-
-        border-radius: 28px;
+    .main {
+        grid-template-columns: 1fr;
     }
 
-    .logo {
-        font-size: 32px;
-    }
-
-    .subtitle {
-        font-size: 13px;
-    }
-
-    .countdown {
-        font-size: 80px;
+    .cameraCard {
+        padding: 8px;
     }
 
     .controls {
-        flex-direction: column;
+        padding: 15px;
     }
-
-    select,
-    button {
-        width: 100%;
-    }
-
-    .capture {
-        padding: 16px;
-    }
-
 }
 
+@media (max-width: 430px) {
+
+    .frameGrid {
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .resultButtons {
+        grid-template-columns: 1fr;
+    }
+
+    #countdown {
+        font-size: 90px;
+    }
+}
 </style>
-
 </head>
-
 
 <body>
 
-
-<div class="orb orb1"></div>
-<div class="orb orb2"></div>
-<div class="orb orb3"></div>
-
-
-<div class="booth">
-
+<div class="app">
 
     <!-- HEADER -->
 
     <div class="header">
 
-        <h1 class="logo">
-            📸 Liquid Booth
-        </h1>
-
-        <p class="subtitle">
-            Capture the moment. Keep the memory. ✨
-        </p>
-
-    </div>
-
-
-    <!-- CAMERA -->
-
-    <div class="camera">
-
-        <video
-            id="video"
-            autoplay
-            playsinline>
-        </video>
-
-
-        <!-- ACCESSORY PREVIEW -->
-
-        <div class="accessory-preview">
-
-            <div
-                class="preview-hat"
-                id="previewHat">
-
-                🤠
-
-            </div>
-
-
-            <div
-                class="preview-glasses"
-                id="previewGlasses">
-
-                🕶️
-
-            </div>
-
-
-            <div
-                class="preview-mustache"
-                id="previewMustache">
-
-                🥸
-
-            </div>
-
+        <div class="glass logo">
+            📸
         </div>
 
-
-        <div
-            class="camera-status"
-            id="cameraStatus">
-
-            ● Starting Camera...
-
-        </div>
-
-
-        <div
-            class="countdown"
-            id="countdown">
-
-            3
-
-        </div>
-
-
-        <div
-            class="flash"
-            id="flash">
+        <div class="title">
+            <h1>LIQUID BOOTH</h1>
+            <p>Your pocket photo booth ✨</p>
         </div>
 
     </div>
 
 
-    <!-- CONTROLS -->
+    <!-- MAIN -->
 
-    <div class="controls">
+    <div class="main">
 
+        <!-- CAMERA -->
 
-        <!-- FRAME -->
+        <div class="glass cameraCard">
 
-        <select id="frame">
+            <div class="camera">
 
-            <option value="joyful">
-                🌈 Joyful
-            </option>
+                <video
+                    id="video"
+                    autoplay
+                    muted
+                    playsinline>
+                </video>
 
-            <option value="romantic">
-                💕 Romantic
-            </option>
+                <div class="status">
+                    <span class="dot">●</span>
+                    <span id="status">
+                        Memulai kamera...
+                    </span>
+                </div>
 
-            <option value="funny">
-                🤪 Funny
-            </option>
+                <div id="countdown"></div>
 
-            <option value="cute">
-                ✨ Cute
-            </option>
+                <div id="flash"></div>
 
-            <option value="classic">
-                🖤 Classic
-            </option>
+            </div>
 
-        </select>
-
-
-        <!-- FILTER -->
-
-        <select id="filter">
-
-            <option value="none">
-                🎨 Original
-            </option>
-
-            <option value="grayscale(1)">
-                🖤 Black & White
-            </option>
-
-            <option value="sepia(1)">
-                🤎 Vintage
-            </option>
-
-            <option value="contrast(1.15) saturate(1.4)">
-                🌈 Vivid
-            </option>
-
-            <option value="brightness(1.15)">
-                ☀️ Bright
-            </option>
-
-        </select>
+        </div>
 
 
-        <!-- ACCESSORIES -->
+        <!-- CONTROLS -->
 
-        <select id="accessory">
+        <div class="glass controls">
 
-            <option value="none">
-                🙂 No Accessory
-            </option>
+            <!-- FILTER -->
 
-            <option value="glasses">
-                🕶️ Kacamata
-            </option>
+            <div class="section">
 
-            <option value="hat">
-                🤠 Topi Koboi
-            </option>
+                <div class="sectionTitle">
+                    🎨 Filter
+                </div>
 
-            <option value="mustache">
-                🥸 Kumis
-            </option>
+                <select id="filterSelect">
 
-            <option value="cowboy">
-                🤠 Koboi Lengkap
-            </option>
+                    <option value="none">
+                        Original
+                    </option>
 
-        </select>
+                    <option value="warm">
+                        ☀️ Warm
+                    </option>
 
+                    <option value="vintage">
+                        📼 Vintage
+                    </option>
 
-        <!-- TAKE -->
+                    <option value="bw">
+                        🖤 Black & White
+                    </option>
 
-        <button
-            class="capture"
-            id="captureBtn">
+                    <option value="cool">
+                        ❄️ Cool
+                    </option>
 
-            📸 Take Photos
+                    <option value="vivid">
+                        🌈 Vivid
+                    </option>
 
-        </button>
+                </select>
 
-
-        <!-- RETAKE -->
-
-        <button
-            class="retake"
-            id="retakeBtn">
-
-            🔄 Retake
-
-        </button>
+            </div>
 
 
-        <!-- DOWNLOAD -->
+            <!-- FRAME -->
 
-        <button
-            class="download"
-            id="downloadBtn">
+            <div class="section">
 
-            ⬇️ Save Photo
+                <div class="sectionTitle">
+                    🖼️ Frame
+                </div>
 
-        </button>
+                <div class="frameGrid">
+
+                    <button
+                        class="frameBtn joyful selected"
+                        data-frame="joyful">
+
+                        🌈 Joyful
+
+                    </button>
+
+                    <button
+                        class="frameBtn romantic"
+                        data-frame="romantic">
+
+                        💕 Romantic
+
+                    </button>
+
+                    <button
+                        class="frameBtn funny"
+                        data-frame="funny">
+
+                        😂 Funny
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- CAPTURE -->
+
+            <button
+                id="captureBtn"
+                class="captureBtn">
+
+                📸 MULAI FOTO — 4X
+
+            </button>
+
+        </div>
 
     </div>
 
 
     <!-- RESULT -->
 
-    <div class="result">
+    <div
+        id="result"
+        class="glass result">
 
-        <canvas id="canvas"></canvas>
+        <h2>
+            📸 Hasil Photo Booth
+        </h2>
 
-    </div>
+        <canvas id="resultCanvas"></canvas>
 
+        <div class="resultButtons">
 
-    <!-- MESSAGE -->
+            <button
+                id="retakeBtn"
+                class="actionBtn">
 
-    <div class="bottom">
+                🔄 Foto Lagi
 
-        <span class="dot"></span>
+            </button>
 
-        <span id="message">
+            <button
+                id="downloadBtn"
+                class="actionBtn">
 
-            Allow camera access to begin
+                ⬇️ Download Foto
 
-        </span>
+            </button>
+
+        </div>
 
     </div>
 
 </div>
 
 
-
 <script>
 
-/* =====================================================
-   ELEMENTS
-===================================================== */
+/* ================= ELEMENTS ================= */
 
 const video =
     document.getElementById("video");
 
-const canvas =
-    document.getElementById("canvas");
-
-const ctx =
-    canvas.getContext("2d");
+const statusText =
+    document.getElementById("status");
 
 const countdown =
     document.getElementById("countdown");
@@ -1200,359 +732,311 @@ const countdown =
 const flash =
     document.getElementById("flash");
 
-const filter =
-    document.getElementById("filter");
-
-const frame =
-    document.getElementById("frame");
-
-const accessory =
-    document.getElementById("accessory");
-
-const message =
-    document.getElementById("message");
-
-const cameraStatus =
-    document.getElementById("cameraStatus");
-
 const captureBtn =
     document.getElementById("captureBtn");
 
-const retakeBtn =
-    document.getElementById("retakeBtn");
+const filterSelect =
+    document.getElementById("filterSelect");
 
-const downloadBtn =
-    document.getElementById("downloadBtn");
+const resultBox =
+    document.getElementById("result");
+
+const resultCanvas =
+    document.getElementById("resultCanvas");
 
 
-const previewHat =
-    document.getElementById("previewHat");
+/* ================= VARIABLES ================= */
 
-const previewGlasses =
-    document.getElementById("previewGlasses");
+let stream = null;
 
-const previewMustache =
-    document.getElementById("previewMustache");
+let selectedFilter = "none";
 
+let selectedFrame = "joyful";
 
 let photos = [];
 
-let takingPhotos = false;
-
-let cameraReady = false;
+let capturing = false;
 
 
-/* =====================================================
-   CAMERA
-===================================================== */
+/* ================= FILTER ================= */
+
+function getFilter(filter) {
+
+    switch (filter) {
+
+        case "warm":
+            return "sepia(.25) saturate(1.3) contrast(1.05)";
+
+        case "vintage":
+            return "sepia(.45) saturate(.75) contrast(1.05)";
+
+        case "bw":
+            return "grayscale(1) contrast(1.1)";
+
+        case "cool":
+            return "saturate(.9) hue-rotate(20deg)";
+
+        case "vivid":
+            return "saturate(1.55) contrast(1.12)";
+
+        default:
+            return "none";
+    }
+}
+
+
+/* ================= CAMERA ================= */
 
 async function startCamera() {
 
+    statusText.textContent =
+        "Meminta izin kamera...";
+
     try {
 
-        if (
-            !navigator.mediaDevices ||
-            !navigator.mediaDevices.getUserMedia
-        ) {
-
-            throw new Error(
-                "Camera API unavailable"
-            );
-
-        }
-
-
-        const stream =
-            await navigator.mediaDevices
-            .getUserMedia({
+        stream =
+            await navigator.mediaDevices.getUserMedia({
 
                 video: {
-                    facingMode: "user"
+                    width: {
+                        ideal: 1280
+                    },
+
+                    height: {
+                        ideal: 720
+                    },
+
+                    frameRate: {
+                        ideal: 30,
+                        max: 30
+                    }
                 },
 
                 audio: false
 
             });
 
-
         video.srcObject =
             stream;
 
-
-        cameraReady =
+        video.muted =
             true;
 
+        video.playsInline =
+            true;
 
-        cameraStatus.innerText =
-            "● Camera Ready";
+        await video.play();
 
-
-        message.innerText =
-            "Choose a frame, filter and accessory ✨";
+        statusText.textContent =
+            "Kamera aktif";
 
     }
 
     catch (error) {
 
-        cameraReady =
-            false;
-
-
-        cameraStatus.innerText =
-            "● Camera Blocked";
-
-
-        message.innerText =
-            "Please allow camera access 📷";
-
-
         console.error(error);
 
-    }
+        statusText.textContent =
+            "Kamera gagal dibuka";
 
-}
-
-
-startCamera();
-
-
-/* =====================================================
-   ACCESSORY PREVIEW
-===================================================== */
-
-function updateAccessoryPreview() {
-
-    const selected =
-        accessory.value;
-
-
-    previewHat.style.display =
-        "none";
-
-    previewGlasses.style.display =
-        "none";
-
-    previewMustache.style.display =
-        "none";
-
-
-    if (
-        selected === "hat"
-    ) {
-
-        previewHat.style.display =
-            "block";
-
-    }
-
-
-    if (
-        selected === "glasses"
-    ) {
-
-        previewGlasses.style.display =
-            "block";
-
-    }
-
-
-    if (
-        selected === "mustache"
-    ) {
-
-        previewMustache.style.display =
-            "block";
-
-    }
-
-
-    if (
-        selected === "cowboy"
-    ) {
-
-        previewHat.style.display =
-            "block";
-
-        previewGlasses.style.display =
-            "block";
-
-        previewMustache.style.display =
-            "block";
+        alert(
+            "Kamera tidak bisa dibuka.\n\n" +
+            "Pastikan kamera tidak sedang digunakan " +
+            "aplikasi lain dan tekan Allow saat browser meminta izin."
+        );
 
     }
 
 }
 
 
-accessory.addEventListener(
+/* ================= FILTER PREVIEW ================= */
+
+filterSelect.addEventListener(
     "change",
-    updateAccessoryPreview
-);
+    () => {
 
-
-/* =====================================================
-   FILTER PREVIEW
-===================================================== */
-
-filter.addEventListener(
-    "change",
-    function() {
+        selectedFilter =
+            filterSelect.value;
 
         video.style.filter =
-            this.value;
+            getFilter(
+                selectedFilter
+            );
 
     }
 );
 
 
-/* =====================================================
-   COUNTDOWN
-===================================================== */
+/* ================= FRAME ================= */
 
-function runCountdown() {
+document
+.querySelectorAll(".frameBtn")
+.forEach(button => {
 
-    return new Promise(resolve => {
+    button.addEventListener(
+        "click",
+        () => {
 
-        let number = 3;
+            document
+            .querySelectorAll(".frameBtn")
+            .forEach(btn => {
 
+                btn.classList.remove(
+                    "selected"
+                );
 
-        function showNumber() {
+            });
 
-            countdown.innerText =
-                number;
-
-
-            countdown.classList.remove(
-                "show"
+            button.classList.add(
+                "selected"
             );
 
-
-            void countdown.offsetWidth;
-
-
-            countdown.classList.add(
-                "show"
-            );
+            selectedFrame =
+                button.dataset.frame;
 
         }
+    );
+
+});
 
 
-        showNumber();
+/* ================= WAIT ================= */
 
+function wait(ms) {
 
-        const timer =
-            setInterval(() => {
-
-                number--;
-
-
-                if (
-                    number <= 0
-                ) {
-
-                    clearInterval(
-                        timer
-                    );
-
-
-                    countdown.classList.remove(
-                        "show"
-                    );
-
-
-                    resolve();
-
-                }
-
-                else {
-
-                    showNumber();
-
-                }
-
-            }, 1000);
-
-    });
+    return new Promise(
+        resolve =>
+            setTimeout(
+                resolve,
+                ms
+            )
+    );
 
 }
 
 
-/* =====================================================
-   FLASH
-===================================================== */
+/* ================= COUNTDOWN ================= */
 
-function cameraFlash() {
+async function runCountdown() {
+
+    for (
+        let i = 3;
+        i >= 1;
+        i--
+    ) {
+
+        countdown.textContent =
+            i;
+
+        countdown.classList.remove(
+            "show"
+        );
+
+        void countdown.offsetWidth;
+
+        countdown.classList.add(
+            "show"
+        );
+
+        await wait(850);
+
+    }
+
+}
+
+
+/* ================= FLASH ================= */
+
+async function flashScreen() {
 
     flash.classList.remove(
         "active"
     );
 
-
     void flash.offsetWidth;
-
 
     flash.classList.add(
         "active"
     );
 
+    await wait(300);
+
 }
 
 
-/* =====================================================
-   TAKE PHOTO
-===================================================== */
+/* ================= TAKE PHOTO ================= */
 
 function takePhoto() {
 
-    const tempCanvas =
+    if (
+        video.readyState < 2
+    ) {
+
+        return null;
+
+    }
+
+    const width =
+        video.videoWidth;
+
+    const height =
+        video.videoHeight;
+
+    if (
+        !width ||
+        !height
+    ) {
+
+        return null;
+
+    }
+
+
+    const canvas =
         document.createElement(
             "canvas"
         );
 
-
-    const width =
-        video.videoWidth || 1280;
-
-
-    const height =
-        video.videoHeight || 720;
-
-
-    tempCanvas.width =
+    canvas.width =
         width;
 
-
-    tempCanvas.height =
+    canvas.height =
         height;
 
 
-    const tempCtx =
-        tempCanvas.getContext(
+    const ctx =
+        canvas.getContext(
             "2d"
         );
 
 
-    /* Mirror */
+    /*
+        Mirror hasil foto
+        supaya sama seperti
+        kamera selfie.
+    */
 
-    tempCtx.translate(
+    ctx.save();
+
+    ctx.translate(
         width,
         0
     );
 
-
-    tempCtx.scale(
+    ctx.scale(
         -1,
         1
     );
 
 
-    /* Filter */
+    ctx.filter =
+        getFilter(
+            selectedFilter
+        );
 
-    tempCtx.filter =
-        filter.value;
 
-
-    tempCtx.drawImage(
+    ctx.drawImage(
         video,
         0,
         0,
@@ -1560,390 +1044,261 @@ function takePhoto() {
         height
     );
 
-
-    /* Accessories */
-
-    drawAccessories(
-        tempCtx,
-        width,
-        height,
-        accessory.value
-    );
+    ctx.restore();
 
 
-    return tempCanvas;
+    return canvas;
 
 }
 
 
-/* =====================================================
-   DRAW ACCESSORIES ON PHOTO
-===================================================== */
+/* ================= CAPTURE ================= */
 
-function drawAccessories(
-    context,
-    width,
-    height,
-    type
-) {
+captureBtn.addEventListener(
+    "click",
+    async () => {
 
-    context.save();
+        if (capturing) {
+            return;
+        }
 
-    context.textAlign =
-        "center";
+        if (
+            !stream ||
+            video.readyState < 2
+        ) {
 
+            alert(
+                "Kamera belum siap."
+            );
 
-    /*
-       These emoji accessories
-       are drawn directly into
-       the photo, so they will
-       also appear in download.
-    */
+            return;
 
-
-    /* TOPI */
-
-    if (
-        type === "hat" ||
-        type === "cowboy"
-    ) {
-
-        context.font =
-            `${Math.round(width * .18)}px Arial`;
+        }
 
 
-        context.fillText(
-            "🤠",
-            width / 2,
-            height * .25
-        );
+        capturing = true;
 
-    }
+        photos = [];
 
 
-    /* KACAMATA */
+        captureBtn.disabled =
+            true;
 
-    if (
-        type === "glasses" ||
-        type === "cowboy"
-    ) {
-
-        context.font =
-            `${Math.round(width * .12)}px Arial`;
+        captureBtn.textContent =
+            "📸 MENGAMBIL FOTO...";
 
 
-        context.fillText(
-            "🕶️",
-            width / 2,
-            height * .53
-        );
+        try {
 
-    }
+            for (
+                let i = 0;
+                i < 4;
+                i++
+            ) {
 
+                await runCountdown();
 
-    /* KUMIS */
+                await flashScreen();
 
-    if (
-        type === "mustache" ||
-        type === "cowboy"
-    ) {
+                const photo =
+                    takePhoto();
 
-        context.font =
-            `${Math.round(width * .10)}px Arial`;
+                if (photo) {
 
+                    photos.push(
+                        photo
+                    );
 
-        context.fillText(
-            "🥸",
-            width / 2,
-            height * .68
-        );
+                }
 
-    }
+                await wait(700);
 
-
-    context.restore();
-
-}
+            }
 
 
-/* =====================================================
-   PHOTO SESSION
-===================================================== */
+            if (
+                photos.length > 0
+            ) {
 
-async function startPhotoSession() {
+                createPhotoStrip();
 
-    if (
-        takingPhotos
-    ) {
-        return;
-    }
+                resultBox.scrollIntoView({
+                    behavior: "smooth"
+                });
+
+            }
+
+        }
+
+        catch (error) {
+
+            console.error(error);
+
+            alert(
+                "Terjadi kesalahan saat mengambil foto."
+            );
+
+        }
 
 
-    if (
-        !cameraReady
-    ) {
+        capturing = false;
 
-        alert(
-            "Camera belum siap. Izinkan akses kamera terlebih dahulu."
-        );
+        captureBtn.disabled =
+            false;
 
-        return;
+        captureBtn.textContent =
+            "📸 MULAI FOTO — 4X";
 
     }
+);
 
 
-    takingPhotos =
-        true;
-
-
-    photos = [];
-
-
-    captureBtn.disabled =
-        true;
-
-
-    captureBtn.style.opacity =
-        ".5";
-
-
-    retakeBtn.style.display =
-        "none";
-
-
-    downloadBtn.style.display =
-        "none";
-
-
-    canvas.style.display =
-        "none";
-
-
-    for (
-        let i = 0;
-        i < 4;
-        i++
-    ) {
-
-        message.innerText =
-            `Photo ${i + 1} of 4 — Get ready!`;
-
-
-        await runCountdown();
-
-
-        cameraFlash();
-
-
-        await new Promise(
-            resolve =>
-                setTimeout(
-                    resolve,
-                    120
-                )
-        );
-
-
-        photos.push(
-            takePhoto()
-        );
-
-
-        message.innerText =
-            `Photo ${i + 1} captured ✨`;
-
-
-        await new Promise(
-            resolve =>
-                setTimeout(
-                    resolve,
-                    700
-                )
-        );
-
-    }
-
-
-    createPhotoStrip();
-
-
-    takingPhotos =
-        false;
-
-}
-
-
-/* =====================================================
-   CREATE PHOTO STRIP
-===================================================== */
+/* ================= PHOTO STRIP ================= */
 
 function createPhotoStrip() {
 
-    const width =
-        600;
+    const W = 700;
+
+    const photoW = 620;
+
+    const photoH = 465;
+
+    const margin = 40;
+
+    const top = 70;
+
+    const gap = 15;
+
+    const footer = 100;
 
 
-    const photoHeight =
-        420;
+    resultCanvas.width =
+        W;
 
-
-    const padding =
-        35;
-
-
-    const gap =
-        18;
-
-
-    const footer =
-        120;
-
-
-    canvas.width =
-        width;
-
-
-    canvas.height =
-        padding +
-        photoHeight * 4 +
-        gap * 3 +
+    resultCanvas.height =
+        top +
+        photos.length * photoH +
+        (photos.length - 1) * gap +
         footer;
 
 
-    const selected =
-        frame.value;
-
-
-    /* =========================
-       BACKGROUND
-    ========================= */
-
-    const bg =
-        ctx.createLinearGradient(
-            0,
-            0,
-            width,
-            canvas.height
+    const ctx =
+        resultCanvas.getContext(
+            "2d"
         );
+
+
+    let background;
 
 
     if (
-        selected === "joyful"
+        selectedFrame === "romantic"
     ) {
 
-        bg.addColorStop(
-            0,
-            "#fff1a8"
-        );
-
-        bg.addColorStop(
-            1,
-            "#ffd6ec"
-        );
+        background =
+            "#ffd6e6";
 
     }
 
     else if (
-        selected === "romantic"
+        selectedFrame === "funny"
     ) {
 
-        bg.addColorStop(
-            0,
-            "#ffd9e7"
-        );
-
-        bg.addColorStop(
-            1,
-            "#f4c8df"
-        );
-
-    }
-
-    else if (
-        selected === "funny"
-    ) {
-
-        bg.addColorStop(
-            0,
-            "#bff5ff"
-        );
-
-        bg.addColorStop(
-            1,
-            "#d9f5b5"
-        );
-
-    }
-
-    else if (
-        selected === "cute"
-    ) {
-
-        bg.addColorStop(
-            0,
-            "#e8d7ff"
-        );
-
-        bg.addColorStop(
-            1,
-            "#ffd8ef"
-        );
+        background =
+            "#c9f4df";
 
     }
 
     else {
 
-        bg.addColorStop(
-            0,
-            "#eeeeee"
-        );
-
-        bg.addColorStop(
-            1,
-            "#cccccc"
-        );
+        background =
+            "#ffe9a8";
 
     }
 
 
     ctx.fillStyle =
-        bg;
-
+        background;
 
     ctx.fillRect(
         0,
         0,
-        width,
-        canvas.height
+        W,
+        resultCanvas.height
     );
 
 
-    /* =========================
-       PHOTOS
-    ========================= */
+    /* TITLE */
+
+    ctx.textAlign =
+        "center";
+
+    ctx.font =
+        "bold 30px Arial";
+
+    ctx.fillStyle =
+        "#555";
+
+
+    let title;
+
+
+    if (
+        selectedFrame === "romantic"
+    ) {
+
+        title =
+            "SWEET MEMORIES 💕";
+
+    }
+
+    else if (
+        selectedFrame === "funny"
+    ) {
+
+        title =
+            "FUN TIMES 😂";
+
+    }
+
+    else {
+
+        title =
+            "GOOD VIBES 🌈";
+
+    }
+
+
+    ctx.fillText(
+        title,
+        W / 2,
+        45
+    );
+
+
+    /* PHOTOS */
 
     photos.forEach(
-        (photo, index) => {
+        (photo,index) => {
 
             const y =
-                padding +
+                top +
                 index *
-                (photoHeight + gap);
+                (photoH + gap);
 
 
             ctx.fillStyle =
-                "rgba(255,255,255,.92)";
+                "white";
 
 
-            roundRect(
+            roundedRect(
                 ctx,
-                22,
-                y - 5,
-                width - 44,
-                photoHeight + 10,
-                16
+                margin - 6,
+                y - 6,
+                photoW + 12,
+                photoH + 12,
+                14
             );
-
 
             ctx.fill();
 
@@ -1951,25 +1306,24 @@ function createPhotoStrip() {
             ctx.save();
 
 
-            roundRect(
+            roundedRect(
                 ctx,
-                28,
+                margin,
                 y,
-                width - 56,
-                photoHeight,
-                12
+                photoW,
+                photoH,
+                10
             );
-
 
             ctx.clip();
 
 
             ctx.drawImage(
                 photo,
-                28,
+                margin,
                 y,
-                width - 56,
-                photoHeight
+                photoW,
+                photoH
             );
 
 
@@ -1979,548 +1333,240 @@ function createPhotoStrip() {
     );
 
 
-    /* Decorations */
-
-    drawDecorations(
-        selected
-    );
-
-
-    /* Footer */
-
-    ctx.textAlign =
-        "center";
-
+    /* FOOTER */
 
     ctx.font =
-        "bold 27px Arial";
-
-
-    if (
-        selected === "joyful"
-    ) {
-
-        ctx.fillStyle =
-            "#e94d78";
-
-        ctx.fillText(
-            "🌈 GOOD VIBES 🌈",
-            width / 2,
-            canvas.height - 55
-        );
-
-    }
-
-    else if (
-        selected === "romantic"
-    ) {
-
-        ctx.fillStyle =
-            "#c94c7b";
-
-        ctx.fillText(
-            "💕 SWEET MEMORIES 💕",
-            width / 2,
-            canvas.height - 55
-        );
-
-    }
-
-    else if (
-        selected === "funny"
-    ) {
-
-        ctx.fillStyle =
-            "#e87518";
-
-        ctx.fillText(
-            "😂 LOL • HAHA • OMG 😂",
-            width / 2,
-            canvas.height - 55
-        );
-
-    }
-
-    else if (
-        selected === "cute"
-    ) {
-
-        ctx.fillStyle =
-            "#8e63b7";
-
-        ctx.fillText(
-            "✨ CUTIE MOMENTS ✨",
-            width / 2,
-            canvas.height - 55
-        );
-
-    }
-
-    else {
-
-        ctx.fillStyle =
-            "#333";
-
-        ctx.fillText(
-            "LIQUID BOOTH",
-            width / 2,
-            canvas.height - 55
-        );
-
-    }
-
-
-    /* Accessory label */
-
-    const selectedAccessory =
-        accessory.value;
-
-
-    ctx.font =
-        "bold 18px Arial";
-
+        "bold 24px Arial";
 
     ctx.fillStyle =
-        "rgba(60,60,80,.75)";
+        "#555";
 
 
-    if (
-        selectedAccessory === "glasses"
-    ) {
-
-        ctx.fillText(
-            "🕶️ COOL MODE",
-            width / 2,
-            canvas.height - 25
-        );
-
-    }
-
-    else if (
-        selectedAccessory === "hat"
-    ) {
-
-        ctx.fillText(
-            "🤠 COWBOY MODE",
-            width / 2,
-            canvas.height - 25
-        );
-
-    }
-
-    else if (
-        selectedAccessory === "mustache"
-    ) {
-
-        ctx.fillText(
-            "🥸 FUNNY MODE",
-            width / 2,
-            canvas.height - 25
-        );
-
-    }
-
-    else if (
-        selectedAccessory === "cowboy"
-    ) {
-
-        ctx.fillText(
-            "🤠 COWBOY MODE 🤠",
-            width / 2,
-            canvas.height - 25
-        );
-
-    }
+    ctx.fillText(
+        "✨ LIQUID BOOTH ✨",
+        W / 2,
+        resultCanvas.height - 35
+    );
 
 
-    /* Show */
-
-    canvas.style.display =
-        "block";
-
-
-    retakeBtn.style.display =
-        "inline-block";
-
-
-    downloadBtn.style.display =
-        "inline-block";
-
-
-    captureBtn.disabled =
-        false;
-
-
-    captureBtn.style.opacity =
-        "1";
-
-
-    message.innerText =
-        "Your photo strip is ready! 🎉";
-
-
-    canvas.scrollIntoView({
-        behavior: "smooth",
-        block: "center"
-    });
+    resultBox.classList.add(
+        "show"
+    );
 
 }
 
 
-/* =====================================================
-   ROUNDED RECT
-===================================================== */
+/* ================= ROUNDED RECT ================= */
 
-function roundRect(
-    context,
+function roundedRect(
+    ctx,
     x,
     y,
-    width,
-    height,
-    radius
+    w,
+    h,
+    r
 ) {
 
-    context.beginPath();
+    ctx.beginPath();
 
-
-    context.moveTo(
-        x + radius,
+    ctx.moveTo(
+        x + r,
         y
     );
 
-
-    context.lineTo(
-        x + width - radius,
+    ctx.lineTo(
+        x + w - r,
         y
     );
 
-
-    context.quadraticCurveTo(
-        x + width,
+    ctx.quadraticCurveTo(
+        x + w,
         y,
-        x + width,
-        y + radius
+        x + w,
+        y + r
     );
 
-
-    context.lineTo(
-        x + width,
-        y + height - radius
+    ctx.lineTo(
+        x + w,
+        y + h - r
     );
 
-
-    context.quadraticCurveTo(
-        x + width,
-        y + height,
-        x + width - radius,
-        y + height
+    ctx.quadraticCurveTo(
+        x + w,
+        y + h,
+        x + w - r,
+        y + h
     );
 
-
-    context.lineTo(
-        x + radius,
-        y + height
+    ctx.lineTo(
+        x + r,
+        y + h
     );
 
-
-    context.quadraticCurveTo(
+    ctx.quadraticCurveTo(
         x,
-        y + height,
+        y + h,
         x,
-        y + height - radius
+        y + h - r
     );
 
-
-    context.lineTo(
+    ctx.lineTo(
         x,
-        y + radius
+        y + r
     );
 
-
-    context.quadraticCurveTo(
+    ctx.quadraticCurveTo(
         x,
         y,
-        x + radius,
+        x + r,
         y
     );
 
-
-    context.closePath();
-
-}
-
-
-/* =====================================================
-   DECORATIONS
-===================================================== */
-
-function drawDecorations(type) {
-
-    ctx.textAlign =
-        "center";
-
-
-    ctx.font =
-        "30px Arial";
-
-
-    if (
-        type === "joyful"
-    ) {
-
-        ctx.fillText(
-            "⭐ 🌈 ☀️ 🌈 ⭐",
-            300,
-            25
-        );
-
-
-        ctx.fillText(
-            "🎈 ✨ 🎈 ✨ 🎈",
-            300,
-            canvas.height - 82
-        );
-
-    }
-
-    else if (
-        type === "romantic"
-    ) {
-
-        ctx.fillText(
-            "💕 💗 💕 💗 💕",
-            300,
-            25
-        );
-
-
-        ctx.fillText(
-            "💖 💕 💖 💕 💖",
-            300,
-            canvas.height - 82
-        );
-
-    }
-
-    else if (
-        type === "funny"
-    ) {
-
-        ctx.fillText(
-            "😂 🤪 😂 🤪 😂",
-            300,
-            25
-        );
-
-
-        ctx.font =
-            "bold 20px Arial";
-
-
-        ctx.fillText(
-            "HAHA • LOL • OMG",
-            300,
-            canvas.height - 82
-        );
-
-    }
-
-    else if (
-        type === "cute"
-    ) {
-
-        ctx.fillText(
-            "✨ 🌸 ✨ 🌸 ✨",
-            300,
-            25
-        );
-
-
-        ctx.fillText(
-            "🌷 ⭐ 🌷 ⭐ 🌷",
-            300,
-            canvas.height - 82
-        );
-
-    }
-
-    else {
-
-        ctx.fillText(
-            "• • • • •",
-            300,
-            25
-        );
-
-    }
+    ctx.closePath();
 
 }
 
 
-/* =====================================================
-   RETAKE
-===================================================== */
+/* ================= DOWNLOAD ================= */
 
-function resetBooth() {
+document
+.getElementById("downloadBtn")
+.addEventListener(
+    "click",
+    () => {
 
-    photos = [];
+        if (
+            !resultCanvas.width ||
+            !resultCanvas.height
+        ) {
 
-
-    canvas.style.display =
-        "none";
-
-
-    retakeBtn.style.display =
-        "none";
-
-
-    downloadBtn.style.display =
-        "none";
-
-
-    captureBtn.disabled =
-        false;
-
-
-    captureBtn.style.opacity =
-        "1";
-
-
-    message.innerText =
-        "Ready for another photo? 📸";
-
-
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
-
-}
-
-
-/* =====================================================
-   DOWNLOAD - FIXED
-===================================================== */
-
-function downloadPhoto() {
-
-    if (
-        canvas.width === 0 ||
-        canvas.height === 0
-    ) {
-
-        alert(
-            "Foto belum tersedia!"
-        );
-
-        return;
-
-    }
-
-
-    message.innerText =
-        "Preparing your photo... ⏳";
-
-
-    canvas.toBlob(
-        function(blob) {
-
-            if (!blob) {
-
-                message.innerText =
-                    "Download failed ❌";
-
-                alert(
-                    "Gagal membuat file foto."
-                );
-
-                return;
-
-            }
-
-
-            const url =
-                URL.createObjectURL(
-                    blob
-                );
-
-
-            const link =
-                document.createElement(
-                    "a"
-                );
-
-
-            link.href =
-                url;
-
-
-            link.download =
-                "liquid-glass-photobooth.png";
-
-
-            link.style.display =
-                "none";
-
-
-            document.body.appendChild(
-                link
+            alert(
+                "Belum ada foto."
             );
 
+            return;
 
-            link.click();
-
-
-            document.body.removeChild(
-                link
-            );
+        }
 
 
-            setTimeout(
-                () => {
+        resultCanvas.toBlob(
+            blob => {
 
-                    URL.revokeObjectURL(
-                        url
+                if (!blob) {
+
+                    alert(
+                        "Download gagal."
                     );
 
-                },
-                1000
+                    return;
+
+                }
+
+
+                const url =
+                    URL.createObjectURL(
+                        blob
+                    );
+
+
+                const link =
+                    document.createElement(
+                        "a"
+                    );
+
+
+                link.href =
+                    url;
+
+                link.download =
+                    "liquid-booth-" +
+                    Date.now() +
+                    ".png";
+
+
+                document.body.appendChild(
+                    link
+                );
+
+                link.click();
+
+                document.body.removeChild(
+                    link
+                );
+
+
+                setTimeout(
+                    () => {
+
+                        URL.revokeObjectURL(
+                            url
+                        );
+
+                    },
+                    1000
+                );
+
+            },
+
+            "image/png"
+
+        );
+
+    }
+);
+
+
+/* ================= RETAKE ================= */
+
+document
+.getElementById("retakeBtn")
+.addEventListener(
+    "click",
+    () => {
+
+        photos = [];
+
+
+        resultBox.classList.remove(
+            "show"
+        );
+
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }
+);
+
+
+/* ================= START CAMERA ================= */
+
+startCamera();
+
+
+/* ================= CLEANUP ================= */
+
+window.addEventListener(
+    "beforeunload",
+    () => {
+
+        if (stream) {
+
+            stream
+            .getTracks()
+            .forEach(
+                track =>
+                    track.stop()
             );
 
+        }
 
-            message.innerText =
-                "Photo saved successfully! 🎉";
-
-        },
-        "image/png"
-    );
-
-}
-
-
-/* =====================================================
-   BUTTONS
-===================================================== */
-
-captureBtn.addEventListener(
-    "click",
-    startPhotoSession
-);
-
-
-retakeBtn.addEventListener(
-    "click",
-    resetBooth
-);
-
-
-downloadBtn.addEventListener(
-    "click",
-    downloadPhoto
+    }
 );
 
 </script>
 
 </body>
 </html>
-```
